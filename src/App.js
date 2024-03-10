@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import ControlledForm from "./Components/ControlledForm";
+import FetchingDataComponent from "./Components/FetchingDataComponent";
+import UncontrolledForm from "./Components/UncontrolledForm";
 import './App.css';
 
 function App() {
+
+  const formStyle = {
+    width: '300px',
+    padding: '20px',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ControlledForm formStyle={formStyle}/>
+      <UncontrolledForm formStyle={formStyle}/>
+      <FetchingDataComponent formStyle={formStyle}/>
     </div>
   );
 }
