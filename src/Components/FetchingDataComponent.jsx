@@ -7,22 +7,21 @@ function UsersFetcher() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    axios
-      .get('https://jsonplaceholder.typicode.com/users')
-      .then((response) => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          'https://jsonplaceholder.typicode.com/users'
+        );
         setUsers(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
-      });
-  }, []);
+      }
+    };
 
-  console.log(users)
+    fetchUsers();
+  }, []);
 
   if (loading) return <p>Завантаження даних...</p>;
   if (error) return <p>Помилка: {error}</p>;
