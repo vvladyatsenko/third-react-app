@@ -1,6 +1,6 @@
-import ControlledForm from "./Components/ControlledForm";
+// import ControlledForm from "./Components/ControlledForm";
 import FetchingDataComponent from "./Components/FetchingDataComponent";
-import UncontrolledForm from "./Components/UncontrolledForm";
+// import UncontrolledForm from "./Components/UncontrolledForm";
 import './App.css';
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
 
   return (
     <div className="App">
-      <ControlledForm formStyle={formStyle}/>
-      <UncontrolledForm formStyle={formStyle}/>
+      {/* <ControlledForm formStyle={formStyle}/> */}
+      {/* <UncontrolledForm formStyle={formStyle}/> */}
       <FetchingDataComponent formStyle={formStyle}/>
     </div>
   );

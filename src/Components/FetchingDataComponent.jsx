@@ -1,46 +1,42 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const FetchingDataComponent = ({ formStyle }) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+function UsersFetcher() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://jsonplaceholder.typicode.com/todos/1'
-        );
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setData(data);
+    setLoading(true);
+    setError(null);
+
+    axios
+      .get('https://jsonplaceholder.typicode.com/users')
+      .then((response) => {
+        setUsers(response.data);
         setLoading(false);
-      } catch (error) {
+      })
+      .catch((error) => {
         setError(error.message);
         setLoading(false);
-      }
-    };
-    fetchData();
+      });
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  console.log(users)
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (loading) return <p>Завантаження даних...</p>;
+  if (error) return <p>Помилка: {error}</p>;
 
   return (
-    <>
-      <h1>FetchingDataComponent</h1>
-      <div style={formStyle}>
-        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      </div>
-    </>
+    <div>
+      <h1>Список користувачів</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
   );
-};
+}
 
-export default FetchingDataComponent;
+export default UsersFetcher;
